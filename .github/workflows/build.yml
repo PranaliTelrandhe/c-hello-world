@@ -1,0 +1,24 @@
+name: Build C Project on Windows
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: [self-hosted, windows]  # ensures it runs on your self-hosted Windows runner
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Build C project
+      - name: Build project
+        run: gcc hello.c -o hello.exe
+
+      # Step 3: Run the executable (acts as a basic test)
+      - name: Run executable
+        run: .\hello.exe
